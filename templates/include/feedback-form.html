@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<form data-action="{% url 'feedback:feedback' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="{% trans 'Введите имя' %}">
+    <input type="email" name="email" placeholder="{% trans 'Введите e-mail' %}">
+    <textarea name="text" cols="30" rows="10" placeholder="{% trans 'Введите текст' %}" maxlength="500"></textarea>
+    <input type="submit">
+</form>

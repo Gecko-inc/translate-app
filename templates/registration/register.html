@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit">
+    </form>
+    <div class="sign-in">
+        {% trans 'Есть аккаунт?' %} <a href="{% url 'account:login' %}">{% trans 'Войти' %}</a>
+    </div>
+{% endblock %}
