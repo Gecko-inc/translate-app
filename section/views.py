@@ -5,6 +5,7 @@ import time
 from django.conf import settings
 from django.core.files.storage import default_storage
 from django.http import JsonResponse
+from django.shortcuts import render
 from django.views.generic import TemplateView
 import speech_recognition as sr
 
@@ -36,8 +37,14 @@ class Index(TemplateView):
         sample_audio = sr.AudioFile(file_name_out)
         with sample_audio as audio_file:
             audio_content = rec.record(audio_file)
-            txt = rec.recognize_google(audio_content, language="ru-RU")
+            try:
+                txt = rec.recognize_google(audio_content, language="ru-RU")
+            except sr.UnknownValueError:
+                txt = rec.recognize_google(audio_content)
         os.remove(file_name)
         os.remove(file_name_out)
         print(txt)
-        return JsonResponse({"msg": txt})
+        return render(request, "page/result.html", {"ru_text": txt,
+                                                    "eng_text": txt,
+                                                    # "kz_text": txt,
+                                                    })
