@@ -6,5 +6,5 @@ app_name = "section"
 
 urlpatterns = [
     path('', Index.as_view(), name='index'),
-    path('trans/', csrf_exempt(Index.translete_audio), name='trans')
+    path('trans/', csrf_exempt(Index.translate_audio), name='trans')
 ]
