@@ -17,6 +17,15 @@ stop.innerHTML = `<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xm
 document.querySelector('#foiceRec').appendChild(div);
 document.querySelector('#foiceRec').appendChild(start);
 document.querySelector('#foiceRec').appendChild(stop);
+stop.style.display = 'none'
+start.addEventListener('click', function() {
+    start.style.display = 'none'
+    stop.style.display = 'block'
+})
+stop.addEventListener('click', function() {
+    stop.style.display = 'none'
+    start.style.display = 'block'
+})
 navigator.mediaDevices.getUserMedia({ audio: true})
     .then(stream => {
         const mediaRecorder = new MediaRecorder(stream);

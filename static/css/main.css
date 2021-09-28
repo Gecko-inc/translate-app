@@ -8,7 +8,7 @@
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2%;
+    padding: 0 70px;
 }
 
 #app {
@@ -65,7 +65,12 @@
 }
 
 #hint ol{
-    margin-left: 18px;
+    margin-left: 28px;
+    font-size: 25px;
+}
+
+.hint-subtitle{
+    font-size: 25px;
 }
 
 #foiceRec {
@@ -91,10 +96,16 @@
     color: #B0B0B0;
 }
 
+.foiceRec-content_button img {
+    margin-right: 3px;
+}
+
 .foiceRec-content_buttons{
     display: flex;
     flex-direction: row;
     margin-bottom: 15px;
+    background-color: none;
+    border: none;
 }
 
 .foiceRec-text{
@@ -105,4 +116,45 @@
     width: 100%;
     outline: none;
     font-size: 21px;
+}
+
+#start{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#stop{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.result_translate{
+    max-width: 90%;
+    margin-top: 50px;
+    position: relative;
+}
+
+.result-translate__title {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 15px;
+}
+
+.result-translate__text{
+    font-size: 25px;
+}
+
+.result-translate__title span{
+    margin-right: 5px;
+}
+
+.result-translate__sound{
+    background: none;
+    border: none;
+    position: absolute;
+    top: 2px;
+    left: -40px;
+    cursor: pointer;
 }
