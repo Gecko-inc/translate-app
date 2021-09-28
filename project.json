@@ -1,0 +1,11 @@
+{
+  "apps": [
+    {
+      "name": "translate-app",
+      "args": "runserver 0:8001",
+      "script": "manage.py",
+      "exec_mode": "fork",
+      "exec_interpreter": "env/bin/python"
+    }
+  ]
+}
