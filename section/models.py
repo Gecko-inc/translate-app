@@ -1,49 +1,29 @@
-from ckeditor_uploader.fields import RichTextUploadingField
+import os
+import datetime
+
 from django.db import models
-from django.utils.translation import gettext_lazy as _
+from django.utils import timezone
 
 from config.views import get_upload_to
 
 
-class Section(models.Model):
-    IMAGE_PATH = "sections/section"
+class Audio(models.Model):
+    IMAGE_PATH = "sections/audio"
 
-    title = models.CharField(_("Заголовок"), max_length=130)
-    image = models.ImageField(_("Изображение"), upload_to=get_upload_to, blank=True)
-    slug = models.CharField(_("URL адрес"), max_length=130, help_text=_("Заполняется автоматически"))
-    description = models.TextField(_("Описание"), max_length=500, blank=True)
-    show_main = models.BooleanField(_("Отображать на главной?"), default=False)
-    is_active = models.BooleanField(_("Активна"), default=False)
+    eng_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
+    ru_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
+    kz_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
 
-    class Meta:
-        verbose_name = _("Раздел")
-        verbose_name_plural = _("Разделы")
-
-    def __str__(self):
-        return self.title
-
-
-class Article(models.Model):
-    IMAGE_PATH = "sections/article"
-
-    title = models.CharField(_("Заголовок"), max_length=130)
-    slug = models.CharField(_("URL адрес"), max_length=130, help_text=_("Заполняется автоматически"))
-    section = models.ForeignKey(Section, verbose_name=_("Раздел"), on_delete=models.SET_NULL, null=True,
-                                related_name="articles", blank=True)
-    short_description = models.TextField(_("Краткое описание"), max_length=500, blank=True)
-    text = RichTextUploadingField(_('Текст публикации'), blank=True)
-    image = models.ImageField(_("Изображение"), upload_to=get_upload_to, blank=True)
-    is_active = models.BooleanField(_("Активна"), default=False)
+    create = models.DateField(default=timezone.now)
 
     class Meta:
-        verbose_name = _("Статья")
-        verbose_name_plural = _("Статьи")
+        verbose_name = "Аудиофайл"
+        verbose_name_plural = "Аудиофайлы"
 
     def __str__(self):
-        return self.title
+        return f"#{self.id}"
 
-
-class ArticleMedia(models.Model):
-    article = models.ForeignKey(Article, verbose_name=_("Статья"), on_delete=models.CASCADE)
-    title = models.CharField(_("Заголовок"), max_length=130, blank=True)
-    image = models.ImageField(_("Изображение"), upload_to=get_upload_to)
+    @classmethod
+    def delete_old(cls):
+        delete_date = datetime.datetime.now() - datetime.timedelta(days=1)
+        cls.objects.filter(create__lte=delete_date).delete()

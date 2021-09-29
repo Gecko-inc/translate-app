@@ -73,6 +73,7 @@ async function sendVoice(form) {
         document.querySelector('#resultResponseTranslate').innerHTML = data
 
         voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').textContent;
+        // voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').innerHTML;
         voiceTextKZ = document.querySelector('#resultResponseTranslate div:nth-child(2) p').textContent;
         voiceTextUS = document.querySelector('#resultResponseTranslate div:nth-child(3) p').textContent;
 

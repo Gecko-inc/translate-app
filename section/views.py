@@ -1,12 +1,16 @@
 import subprocess
 import os
 import time
+
+from django.core.files import File
+from gtts import gTTS
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.views.generic import TemplateView
 import speech_recognition as sr
 from deep_translator import GoogleTranslator
 from config.views import common_context
+from section.models import Audio
 
 
 class Index(TemplateView):
@@ -20,6 +24,7 @@ class Index(TemplateView):
 
     @classmethod
     def translate_audio(cls, request):
+        Audio.delete_old()
         file = request.FILES.get("voice")
         if file:
             file_name = f'{str(time.time()).replace(".", "")}.wav'
@@ -44,9 +49,26 @@ class Index(TemplateView):
             ru_text = GoogleTranslator(source='auto', target='ru').translate(text=txt)
             eng_text = GoogleTranslator(source='auto', target='en').translate(text=txt)
             kz_text = GoogleTranslator(source='auto', target='kk').translate(text=txt)
+            ru_obj = gTTS(text=ru_text, lang='ru', slow=False)
+            ru_name = f"ru_file{str(time.time()).replace('.', '')}.mp3"
+            ru_obj.save(ru_name)
+
+            en_obj = gTTS(text=eng_text, lang='en', slow=False)
+            en_name = f"en_file{str(time.time()).replace('.', '')}.mp3"
+            en_obj.save(en_name)
+
+            kz_obj = gTTS(text=kz_text, lang='ru', slow=False)
+            kz_name = f"kz_file{str(time.time()).replace('.', '')}.mp3"
+            kz_obj.save(kz_name)
+            audio = Audio.objects.create(
+                kz_audio=File(file=open(kz_name, 'rb'), name=kz_name),
+                ru_audio=File(file=open(ru_name, 'rb'), name=ru_name),
+                eng_audio=File(file=open(en_name, 'rb'), name=en_name),
+            )
             return render(request, "page/result.html", {"ru_text": ru_text,
                                                         "eng_text": eng_text,
                                                         "kz_text": kz_text,
+                                                        "audio": audio,
                                                         })
 
         return JsonResponse({
