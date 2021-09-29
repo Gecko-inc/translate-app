@@ -1,4 +1,16 @@
+import os
+
+from section.models import Audio
 from .models import Config
+
+
+def delete_file(files: list):
+    Audio.delete_old()
+    for file in files:
+        try:
+            os.remove(file)
+        except FileNotFoundError:
+            pass
 
 
 def get_upload_to(instance, filename) -> str:

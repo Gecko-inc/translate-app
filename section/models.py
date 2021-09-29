@@ -4,15 +4,11 @@ import datetime
 from django.db import models
 from django.utils import timezone
 
-from config.views import get_upload_to
-
 
 class Audio(models.Model):
-    IMAGE_PATH = "sections/audio"
-
-    eng_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
-    ru_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
-    kz_audio = models.FileField(upload_to=get_upload_to, blank=True, null=True)
+    eng_audio = models.FileField(upload_to='audio', blank=True, null=True)
+    ru_audio = models.FileField(upload_to='audio', blank=True, null=True)
+    kz_audio = models.FileField(upload_to='audio', blank=True, null=True)
 
     create = models.DateField(default=timezone.now)
 
@@ -25,9 +21,21 @@ class Audio(models.Model):
 
     @classmethod
     def delete_old(cls):
-        delete_date = datetime.datetime.now() - datetime.timedelta(days=1)
+        delete_date = datetime.datetime.now() - datetime.timedelta(minutes=21)
         for item in cls.objects.filter(create__lte=delete_date):
-            os.remove(item.eng_audio.url)
-            os.remove(item.ru_audio.url)
-            os.remove(item.kz_audio.url)
+            if item.eng_audio:
+                try:
+                    os.remove(item.eng_audio.url)
+                except FileNotFoundError:
+                    pass
+            if item.ru_audio:
+                try:
+                    os.remove(item.ru_audio.url)
+                except FileNotFoundError:
+                    pass
+            if item.kz_audio:
+                try:
+                    os.remove(item.kz_audio.url)
+                except FileNotFoundError:
+                    pass
             item.delete()

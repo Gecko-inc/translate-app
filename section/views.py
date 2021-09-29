@@ -1,6 +1,6 @@
 import subprocess
-import os
 import time
+import threading
 
 from django.core.files import File
 from gtts import gTTS
@@ -9,7 +9,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 import speech_recognition as sr
 from deep_translator import GoogleTranslator
-from config.views import common_context
+from config.views import common_context, delete_file
 from section.models import Audio
 
 
@@ -24,7 +24,7 @@ class Index(TemplateView):
 
     @classmethod
     def translate_audio(cls, request):
-        Audio.delete_old()
+        # TODO: Нужно оптимизировать
         file = request.FILES.get("voice")
         if file:
             file_name = f'{str(time.time()).replace(".", "")}.wav'
@@ -44,8 +44,7 @@ class Index(TemplateView):
                     txt = rec.recognize_google(audio_content, language="ru-RU")
                 except sr.UnknownValueError:
                     txt = rec.recognize_google(audio_content)
-            os.remove(file_name)
-            os.remove(file_name_out)
+
             ru_text = GoogleTranslator(source='auto', target='ru').translate(text=txt)
             eng_text = GoogleTranslator(source='auto', target='en').translate(text=txt)
             kz_text = GoogleTranslator(source='auto', target='kk').translate(text=txt)
@@ -65,9 +64,9 @@ class Index(TemplateView):
                 ru_audio=File(file=open(ru_name, 'rb'), name=ru_name),
                 eng_audio=File(file=open(en_name, 'rb'), name=en_name),
             )
-            os.remove(kz_name)
-            os.remove(ru_name)
-            os.remove(en_name)
+            threading.Thread(target=delete_file, name='delete_files',
+                             args=([kz_name, en_name, ru_name, file_name, file_name_out],)).start()
+
             return render(request, "page/result.html", {"ru_text": ru_text,
                                                         "eng_text": eng_text,
                                                         "kz_text": kz_text,
