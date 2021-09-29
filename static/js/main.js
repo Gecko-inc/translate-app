@@ -53,21 +53,65 @@ navigator.mediaDevices.getUserMedia({ audio: true})
             audioChunks = [];
         });
     });
+let userLanguage = {
+    leng: null,
+    voiceLang: null
+}
+
+let voiceTextRU
+let voiceTextKZ
+let voiceTextUS
 
 async function sendVoice(form) {
     let promise = await fetch(URL, {
         method: 'POST',
-        body: form});
+        body: form
+    }).then(res => {
+        return res.text();
+    })
+    .then(data => {
+        document.querySelector('#resultResponseTranslate').innerHTML = data
+
+        voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').textContent;
+        voiceTextKZ = document.querySelector('#resultResponseTranslate div:nth-child(2) p').textContent;
+        voiceTextUS = document.querySelector('#resultResponseTranslate div:nth-child(3) p').textContent;
+
+        document.querySelector('.result_translate-end').style.display = 'block'
+        
+        document.querySelector('#translateResultRU').innerHTML = `${voiceTextRU}`
+        document.querySelector('#translateResultKZ').innerHTML = `${voiceTextUS}`
+        document.querySelector('#translateResultUS').innerHTML = `${voiceTextKZ}`
+    });
     if (promise.ok) {
+        
         let response =  await promise.json();
-        console.log(response.data);
+        console.log(response)
         let audio = document.createElement('audio');
+        console.log(audio)
         audio.src = response.data;
         audio.controls = true;
         audio.autoplay = true;
         document.querySelector('#messages').appendChild(audio);
     }
 }
+setInterval(() => {
+    if(userLanguage.voiceLang == "RU") {
+        document.querySelector('.foiceRec-text').setAttribute('value', '')
+        if(voiceTextRU !== undefined){
+            document.querySelector('.foiceRec-text').setAttribute('value', voiceTextRU)
+        }
+    } else if(userLanguage.voiceLang = "KZ") {
+        document.querySelector('.foiceRec-text').setAttribute('value', '')
+        if(voiceTextKZ !== undefined){
+            document.querySelector('.foiceRec-text').setAttribute('value', voiceTextKZ)
+        }
+    } else if(userLanguage.voiceLang = "US") {
+        document.querySelector('.foiceRec-text').setAttribute('value', '')
+        if(voiceTextUS !== undefined){
+            document.querySelector('.foiceRec-text').setAttribute('value', voiceTextUS)
+        }
+    }
+}, 1000)
 
 // Typing
 let typingContainer = document.querySelector('#typingText')
@@ -99,9 +143,27 @@ selectKazahstan.addEventListener('click', function(){
     document.querySelector('.hint-subtitle').append('Bul qalaı jumys isteıdi ?');
 
     document.querySelector('.hint-one').append('Mıkrofondy basyńyz');
-    document.querySelector('.hint-two').append('"Sálem Oleg" dep aıtyńyz jáne ol sizge bárin aıtady');
-    document.querySelector('.hint-three').append('Eger ýaqyt bolmasa, "Oleg [sózdi] [aǵylshyn] tiline aýdaryńyz" dep aıtyńyz.');
+    document.querySelector('.hint-two').append('Kez-kelgen termındi aıtyńyz');
+    document.querySelector('.hint-three').append('Mıkrofondy taǵy bir ret basyńyz');
+
+    document.querySelector('#translateResultKZkz').style.display = 'block'
+
+    userLanguage.lang = 'KZ'
+    userLanguage.voiceLang = 'KZ'
 });
+
+languageKZ.addEventListener('click', function() {
+    userLanguage.lang = 'KZ'
+    document.querySelector('#translateResultKZkz').style.display = 'block'
+
+    document.querySelector('#translateResultUSus').style.display = 'none'
+    document.querySelector('#translateResultRUru').style.display = 'none'
+
+    document.querySelector('#languageRU').style.color = "#B0B0B0"
+    document.querySelector('#languageUS').style.color = "#B0B0B0"
+    document.querySelector('#languageKZ').style.color = "#59BECC"
+})
+
 
 selectRussian.addEventListener('click', function(){
     selectLenguage.style.display = "none";
@@ -112,9 +174,27 @@ selectRussian.addEventListener('click', function(){
     document.querySelector('.hint-subtitle').append('Как это работает ?');
 
     document.querySelector('.hint-one').append('Нажимай на микрофон');
-    document.querySelector('.hint-two').append('Скажи "Привет Олег" и он тебе сам все расскажет');
-    document.querySelector('.hint-three').append('Если нет времени, просто скажи "Олег переведи [слово] на [английский язык]"');
+    document.querySelector('.hint-two').append('Скажи любой термин');
+    document.querySelector('.hint-three').append('Нажми еще раз на микрофон');
+
+    document.querySelector('#translateResultRUru').style.display = 'block'
+
+    userLanguage.lang = 'RU'
+    userLanguage.voiceLang = 'RU'
 });
+
+languageRU.addEventListener('click', function() {
+    userLanguage.lang = 'RU'
+    document.querySelector('#translateResultRUru').style.display = 'block'
+
+    document.querySelector('#translateResultKZkz').style.display = 'none'
+    document.querySelector('#translateResultUSus').style.display = 'none'
+
+    document.querySelector('#languageRU').style.color = "#59BECC"
+    document.querySelector('#languageUS').style.color = "#B0B0B0"
+    document.querySelector('#languageKZ').style.color = "#B0B0B0"
+})
+
 
 selectEngl.addEventListener('click', function(){
     selectLenguage.style.display = "none";
@@ -125,6 +205,23 @@ selectEngl.addEventListener('click', function(){
     document.querySelector('.hint-subtitle').append('How does it work?');
 
     document.querySelector('.hint-one').append('Press the microphone');
-    document.querySelector('.hint-two').append('Say "Hi Oleg" and he\'\ll tell you all about it.');
-    document.querySelector('.hint-three').append('If there is no time, just say "Oleg, translate [word] into [English].');
+    document.querySelector('.hint-two').append('Say any term');
+    document.querySelector('.hint-three').append('Press the microphone again');
+
+    document.querySelector('#translateResultUSus').style.display = 'block'
+
+    userLanguage.lang = 'US'
+    userLanguage.voiceLang = 'US'
 });
+
+languageUS.addEventListener('click', function() {
+    userLanguage.lang = 'US'
+    document.querySelector('#translateResultUSus').style.display = 'block'
+
+    document.querySelector('#translateResultRUru').style.display = 'none'
+    document.querySelector('#translateResultKZkz').style.display = 'none'
+
+    document.querySelector('#languageRU').style.color = "#B0B0B0"
+    document.querySelector('#languageUS').style.color = "#59BECC"
+    document.querySelector('#languageKZ').style.color = "#B0B0B0"
+})

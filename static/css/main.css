@@ -57,6 +57,14 @@
     transform: scale(1.5);
 }
 
+.result_translate-end{
+    display: none;
+}
+
+.qwerty{
+    display: none;
+}
+
 .hint-title{
     font-weight: 700;
     font-size: 80px;
@@ -157,4 +165,16 @@
     top: 2px;
     left: -40px;
     cursor: pointer;
+}
+
+#translateResultRUru {
+    display: none;
+}
+
+#translateResultKZkz {
+    display: none;
+}
+
+#translateResultUSus {
+    display: none;
 }

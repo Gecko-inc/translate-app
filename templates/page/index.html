@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 </head>
 <body>
+    <div id="resultResponseTranslate" class="qwerty"></div>
+
     <div id="selectLenguage">
         <h1 id="typingText"></h1>
         <div class="selectLenguage__items">
@@ -56,12 +58,28 @@
                 <div id="foiceRec">
                     <input class="foiceRec-text" type="text">
                 </div>
-                <div class="result_translate">
-                    <button class="result-translate__sound">
-                        <img src="{% static 'img/sound.svg' %}" alt="">
-                    </button>
-                    <p class="result-translate__title"><span>[RU]</span> Слово для перевода</p>
-                    <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p>
+                <div class="result_translate-end">
+                    <div class="result_translate" id="translateResultRUru">
+                        <!-- <button class="result-translate__sound">
+                            <img src="{% static 'img/sound.svg' %}" alt="">
+                        </button> -->
+                        <p class="result-translate__title"><span>[RU]</span> <span id='translateResultRU'>Слово для перевода</span></p>
+                        <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
+                    </div>
+                    <div class="result_translate" id="translateResultKZkz">
+                        <!-- <button class="result-translate__sound">
+                            <img src="{% static 'img/sound.svg' %}" alt="">
+                        </button> -->
+                        <p class="result-translate__title"><span>[KZ]</span> <span id='translateResultKZ'>Слово для перевода</span></p>
+                        <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
+                    </div>
+                    <div class="result_translate" id="translateResultUSus">
+                        <!-- <button class="result-translate__sound">
+                            <img src="{% static 'img/sound.svg' %}" alt="">
+                        </button> -->
+                        <p class="result-translate__title"><span>[US]</span> <span id='translateResultUS'>Слово для перевода</span></p>
+                        <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
+                    </div>
                 </div>
             </div>
         </div>
