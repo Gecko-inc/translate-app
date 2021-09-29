@@ -26,4 +26,8 @@ class Audio(models.Model):
     @classmethod
     def delete_old(cls):
         delete_date = datetime.datetime.now() - datetime.timedelta(days=1)
-        cls.objects.filter(create__lte=delete_date).delete()
+        for item in cls.objects.filter(create__lte=delete_date):
+            os.remove(item.eng_audio.url)
+            os.remove(item.ru_audio.url)
+            os.remove(item.kz_audio.url)
+            item.delete()

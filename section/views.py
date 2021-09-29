@@ -65,6 +65,9 @@ class Index(TemplateView):
                 ru_audio=File(file=open(ru_name, 'rb'), name=ru_name),
                 eng_audio=File(file=open(en_name, 'rb'), name=en_name),
             )
+            os.remove(kz_name)
+            os.remove(ru_name)
+            os.remove(en_name)
             return render(request, "page/result.html", {"ru_text": ru_text,
                                                         "eng_text": eng_text,
                                                         "kz_text": kz_text,
