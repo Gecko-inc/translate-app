@@ -1,12 +1,29 @@
 <div>
     <b>Ru</b>
-    <p>{{ ru_text }} <br> <audio src="{{ audio.ru_audio.url }}"></audio> </p>
+    <p>{{ ru_text }}</p>
 </div>
 <div>
     <b>Eng</b>
-    <p>{{ eng_text }} <br> <audio src="{{ audio.eng_audio.url }}"></audio> </p>
+    <p>{{ eng_text }}</p>
 </div>
 <div>
     <b>Kz</b>
-    <p>{{ kz_text }} <br> <audio src="{{ audio.kz_audio.url }}"></audio> </p>
+    <p>{{ kz_text }}</p>
 </div>
+
+
+<audio controls>
+    <source src="{{ audio.ru_audio.url }}" type="audio/mp3">
+    <source src="{{ audio.eng_audio.url }}" type="audio/mp3">
+    <source src="{{ audio.kz_audio.url }}" type="audio/mp3">
+</audio>
+
+
+<audio controls>
+    <source src="{{ audio.eng_audio.url }}" type="audio/mp3">
+</audio>
+
+
+<audio controls>
+    <source src="{{ audio.kz_audio.url }}" type="audio/mp3">
+</audio>

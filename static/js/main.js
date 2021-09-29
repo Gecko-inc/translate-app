@@ -73,7 +73,6 @@ async function sendVoice(form) {
         document.querySelector('#resultResponseTranslate').innerHTML = data
 
         voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').textContent;
-        // voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').innerHTML;
         voiceTextKZ = document.querySelector('#resultResponseTranslate div:nth-child(2) p').textContent;
         voiceTextUS = document.querySelector('#resultResponseTranslate div:nth-child(3) p').textContent;
 
@@ -82,6 +81,9 @@ async function sendVoice(form) {
         document.querySelector('#translateResultRU').innerHTML = `${voiceTextRU}`
         document.querySelector('#translateResultKZ').innerHTML = `${voiceTextUS}`
         document.querySelector('#translateResultUS').innerHTML = `${voiceTextKZ}`
+
+        // Код сеньор JS азработчика
+        document.querySelector('#result_test').innerHTML = data
     });
     if (promise.ok) {
         
