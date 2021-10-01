@@ -42,17 +42,17 @@
             </div>
             <div class="foiceRec-content">
                 <div class="foiceRec-content_buttons">
-                    <button class="foiceRec-content_button">
+                    <button class="foiceRec-content_button" id="languageRU">
                         <img src="{% static 'img/🇷🇺.svg' %}" alt="">
-                        <p id="languageRU">RU</p>
+                        <p>RU</p>
                     </button>
-                    <button class="foiceRec-content_button" style="margin: 0 35px;">
+                    <button class="foiceRec-content_button" style="margin: 0 35px;" id="languageKZ">
                         <img src="{% static 'img/🇰🇿.svg' %}" alt="">
-                        <p id="languageKZ">KZ</p>
+                        <p>KZ</p>
                     </button>
-                    <button class="foiceRec-content_button">
+                    <button class="foiceRec-content_button" id="languageUS">
                         <img src="{% static 'img/🇺🇸.svg' %}" alt="">
-                        <p id="languageUS">US</p>
+                        <p>US</p>
                     </button>
                 </div>
                 <div id="foiceRec">
@@ -60,28 +60,26 @@
                 </div>
                 <div class="result_translate-end">
                     <div class="result_translate" id="translateResultRUru">
-                        <!-- <button class="result-translate__sound">
+                        <button class="result-translate__sound" id="playRU">
                             <img src="{% static 'img/sound.svg' %}" alt="">
-                        </button> -->
+                        </button>
                         <p class="result-translate__title"><span>[RU]</span> <span id='translateResultRU'>Слово для перевода</span></p>
                         <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
                     </div>
                     <div class="result_translate" id="translateResultKZkz">
-                        <!-- <button class="result-translate__sound">
+                        <button class="result-translate__sound" id="playKZ">
                             <img src="{% static 'img/sound.svg' %}" alt="">
-                        </button> -->
+                        </button>
                         <p class="result-translate__title"><span>[KZ]</span> <span id='translateResultKZ'>Слово для перевода</span></p>
                         <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
                     </div>
                     <div class="result_translate" id="translateResultUSus">
-                        <!-- <button class="result-translate__sound">
+                        <button class="result-translate__sound" id="playUS">
                             <img src="{% static 'img/sound.svg' %}" alt="">
-                        </button> -->
+                        </button>
                         <p class="result-translate__title"><span>[US]</span> <span id='translateResultUS'>Слово для перевода</span></p>
                         <!-- <p class="result-translate__text">Занчение слова Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa id nam quos eveniet, minima aut libero molestias nemo nihil fuga hic delectus maiores reprehenderit illum? Optio cumque dicta voluptate perferendis?</p> -->
                     </div>
-
-                    <div id="result_test"></div>
                 </div>
             </div>
         </div>

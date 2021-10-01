@@ -58,9 +58,14 @@ let userLanguage = {
     voiceLang: null
 }
 
-let voiceTextRU
-let voiceTextKZ
-let voiceTextUS
+let voiceTextRU;
+let voiceAudioRU;
+
+let voiceTextKZ;
+let voiceAudioKZ;
+
+let voiceTextUS;
+let voiceAudioUS;
 
 async function sendVoice(form) {
     let promise = await fetch(URL, {
@@ -73,8 +78,13 @@ async function sendVoice(form) {
         document.querySelector('#resultResponseTranslate').innerHTML = data
 
         voiceTextRU = document.querySelector('#resultResponseTranslate div:nth-child(1) p').textContent;
+        voiceAudioRU = document.querySelectorAll('#resultResponseTranslate audio')[0]
+
         voiceTextKZ = document.querySelector('#resultResponseTranslate div:nth-child(2) p').textContent;
+        voiceAudioKZ = document.querySelectorAll('#resultResponseTranslate audio')[1]
+
         voiceTextUS = document.querySelector('#resultResponseTranslate div:nth-child(3) p').textContent;
+        voiceAudioUS = document.querySelectorAll('#resultResponseTranslate audio')[2]
 
         document.querySelector('.result_translate-end').style.display = 'block'
         
@@ -141,7 +151,7 @@ selectKazahstan.addEventListener('click', function(){
     selectLenguage.style.display = "none";
     app.style.display = "block";
  
-    document.querySelector('#languageKZ').style.color = "#59BECC"
+    document.querySelector('#languageKZ p').style.color = "#59BECC"
     document.querySelector('.hint-title').append('Sálem');
     document.querySelector('.hint-subtitle').append('Bul qalaı jumys isteıdi ?');
 
@@ -162,9 +172,9 @@ languageKZ.addEventListener('click', function() {
     document.querySelector('#translateResultUSus').style.display = 'none'
     document.querySelector('#translateResultRUru').style.display = 'none'
 
-    document.querySelector('#languageRU').style.color = "#B0B0B0"
-    document.querySelector('#languageUS').style.color = "#B0B0B0"
-    document.querySelector('#languageKZ').style.color = "#59BECC"
+    document.querySelector('#languageRU p').style.color = "#B0B0B0"
+    document.querySelector('#languageUS p').style.color = "#B0B0B0"
+    document.querySelector('#languageKZ p').style.color = "#59BECC"
 })
 
 
@@ -172,7 +182,7 @@ selectRussian.addEventListener('click', function(){
     selectLenguage.style.display = "none";
     app.style.display = "block";
 
-    document.querySelector('#languageRU').style.color = "#59BECC"
+    document.querySelector('#languageRU p').style.color = "#59BECC"
     document.querySelector('.hint-title').append('Привет');
     document.querySelector('.hint-subtitle').append('Как это работает ?');
 
@@ -193,9 +203,9 @@ languageRU.addEventListener('click', function() {
     document.querySelector('#translateResultKZkz').style.display = 'none'
     document.querySelector('#translateResultUSus').style.display = 'none'
 
-    document.querySelector('#languageRU').style.color = "#59BECC"
-    document.querySelector('#languageUS').style.color = "#B0B0B0"
-    document.querySelector('#languageKZ').style.color = "#B0B0B0"
+    document.querySelector('#languageRU p').style.color = "#59BECC"
+    document.querySelector('#languageUS p').style.color = "#B0B0B0"
+    document.querySelector('#languageKZ p').style.color = "#B0B0B0"
 })
 
 
@@ -203,7 +213,7 @@ selectEngl.addEventListener('click', function(){
     selectLenguage.style.display = "none";
     app.style.display = "block";
 
-    document.querySelector('#languageUS').style.color = "#59BECC"
+    document.querySelector('#languageUS p').style.color = "#59BECC"
     document.querySelector('.hint-title').append('Hello');
     document.querySelector('.hint-subtitle').append('How does it work?');
 
@@ -224,7 +234,19 @@ languageUS.addEventListener('click', function() {
     document.querySelector('#translateResultRUru').style.display = 'none'
     document.querySelector('#translateResultKZkz').style.display = 'none'
 
-    document.querySelector('#languageRU').style.color = "#B0B0B0"
-    document.querySelector('#languageUS').style.color = "#59BECC"
-    document.querySelector('#languageKZ').style.color = "#B0B0B0"
+    document.querySelector('#languageRU p').style.color = "#B0B0B0"
+    document.querySelector('#languageUS p').style.color = "#59BECC"
+    document.querySelector('#languageKZ p').style.color = "#B0B0B0"
+})
+
+playRU.addEventListener('click', function(){
+    voiceAudioRU.play();
+})
+
+playUS.addEventListener('click', function(){
+    voiceAudioKZ.play();
+})
+
+playKZ.addEventListener('click', function(){
+    voiceAudioUS.play();
 })
