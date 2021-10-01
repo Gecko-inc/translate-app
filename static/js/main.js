@@ -147,23 +147,23 @@ typewriter
     .start();
 
 // Select lenguage
-selectKazahstan.addEventListener('click', function(){
-    selectLenguage.style.display = "none";
-    app.style.display = "block";
- 
-    document.querySelector('#languageKZ p').style.color = "#59BECC"
-    document.querySelector('.hint-title').append('Sálem');
-    document.querySelector('.hint-subtitle').append('Bul qalaı jumys isteıdi ?');
-
-    document.querySelector('.hint-one').append('Mıkrofondy basyńyz');
-    document.querySelector('.hint-two').append('Kez-kelgen termındi aıtyńyz');
-    document.querySelector('.hint-three').append('Mıkrofondy taǵy bir ret basyńyz');
-
-    document.querySelector('#translateResultKZkz').style.display = 'block'
-
-    userLanguage.lang = 'KZ'
-    userLanguage.voiceLang = 'KZ'
-});
+// selectKazahstan.addEventListener('click', function(){
+//     selectLenguage.style.display = "none";
+//     app.style.display = "block";
+//
+//     document.querySelector('#languageKZ p').style.color = "#59BECC"
+//     document.querySelector('.hint-title').append('Sálem');
+//     document.querySelector('.hint-subtitle').append('Bul qalaı jumys isteıdi ?');
+//
+//     document.querySelector('.hint-one').append('Mıkrofondy basyńyz');
+//     document.querySelector('.hint-two').append('Kez-kelgen termındi aıtyńyz');
+//     document.querySelector('.hint-three').append('Mıkrofondy taǵy bir ret basyńyz');
+//
+//     document.querySelector('#translateResultKZkz').style.display = 'block'
+//
+//     userLanguage.lang = 'KZ'
+//     userLanguage.voiceLang = 'KZ'
+// });
 
 languageKZ.addEventListener('click', function() {
     userLanguage.lang = 'KZ'
