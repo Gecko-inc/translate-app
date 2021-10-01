@@ -26,7 +26,7 @@ PARSER_API = config['parser_api']
 
 # При False необходимо настроить nginx
 DEBUG = True
-ALLOWED_HOSTS = ["*",]
+ALLOWED_HOSTS = ["*", 'translate.geckostudio.xyz']
 
 # Используемые приложения
 INSTALLED_APPS = [
