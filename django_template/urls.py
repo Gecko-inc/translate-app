@@ -20,7 +20,6 @@ urlpatterns = [
 
 urlpatterns += i18n_patterns(
     url(r'^', include('section.urls', namespace='section')),
-    url(r'^', include('account.urls', namespace='account')),
     prefix_default_language=False
 )
 

@@ -9,18 +9,12 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 import speech_recognition as sr
 from deep_translator import GoogleTranslator
-from config.views import common_context, delete_file
+from config.views import delete_file
 from section.models import Audio
 
 
 class Index(TemplateView):
     template_name = 'page/index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(Index, self).get_context_data(**kwargs)
-        context.update(common_context())
-
-        return context
 
     @classmethod
     def translate_audio(cls, request):

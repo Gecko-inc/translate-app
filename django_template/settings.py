@@ -26,7 +26,7 @@ PARSER_API = config['parser_api']
 
 # При False необходимо настроить nginx
 DEBUG = True
-ALLOWED_HOSTS = ["*", 'futurefut.com']
+ALLOWED_HOSTS = ["*",]
 
 # Используемые приложения
 INSTALLED_APPS = [
