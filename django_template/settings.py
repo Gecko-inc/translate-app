@@ -25,7 +25,7 @@ SECRET_KEY = str(config['secret_key'])
 PARSER_API = config['parser_api']
 
 # При False необходимо настроить nginx
-DEBUG = True
+DEBUG = False
 ALLOWED_HOSTS = ["*", 'geckotest.xyz']
 
 # Используемые приложения
@@ -221,12 +221,12 @@ ROSETTA_MESSAGES_PER_PAGE = 50
 
 # Настройки медиа и статик файлов
 
-if DEBUG:
-    STATICFILES_DIRS = [
-        os.path.join(BASE_DIR, "static"),
-    ]
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, "static")
+# if DEBUG:
+#     STATICFILES_DIRS = [
+#         os.path.join(BASE_DIR, "static"),
+#     ]
+# else:
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
